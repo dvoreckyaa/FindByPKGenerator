@@ -37,3 +37,4 @@ project.lock.json
 *.ipch
 
 /Source/Properties/launchSettings.json
+/Tool.FindByPKGenerator/Properties/launchSettings.json

@@ -19,17 +19,25 @@ public static Entity FindByPrimaryKey(this DbSet<Entity> entities, Int32 Id)
 
 #### Common.FindByPKGenerator - assembly containing functions to generate source code file or string containing the source code
  
-* GenerateFileFromAssembly -  Generates a source file containing an extension to support Find functions with named parameters. 
+* GenerateFileFromAssembly -  Generates a source file containing an extension to support Find functions with named parameters. assembly (dll) file must be provied as parameter.
+* GenerateFileFromProject - Generates a source file containing an extension to support Find functions with named parameters. csproj file must be provied as parameter.
 * GenerateFileContentFromType -  Generates a string containing an extension to support Find functions with named parameters.
 * GenerateFileFromType -  Generates *.cs a file containing an extension to support Find functions with named parameters.
 
 #### Tool.FindByPKGenerator.exe - a CLI tool to generate DBSet extensions.
 
-| Short Name   | Name          |Description                        |
-|------------- |:--------------|:----------------------------------|
-| -a           | --assembly    | Required. DbContext assembly path |
-| -o           | --outputFolder| Required. Output folder           |
-| -x           | --contextName | Context name                      |
-| -f           | --fileName    | Output file name                  |
+| Short Name   | Name                |Description                        |
+|------------- |:--------------------|:----------------------------------|
+| -a           | --assembly          | Required. DbContext assembly path or csproj file path or the path to the folder containig csproj file |
+| -o           | --outputFolder      | Required. Output folder           |
+| -x           | --contextName       | Context name                      |
+| -f           | --outputFileName    | Output file name                  |
+
+#### Examples:
+```
+ --i c:\Projects\Admin.Db\ --o c:\Projects\Admin.Db\Generated --f FindByPKExtension
+ --i c:\Projects\Admin.Db\Admin.Db.csproj --o c:\Projects\Admin.Db\Generated
+ --i c:\Projects\Build\Admin.Db.dll --o c:\Projects\Admin.Db\Generated
+```
     
 The tool uses [commandlineparser](https://github.com/commandlineparser/commandline) to parse command line arguments.

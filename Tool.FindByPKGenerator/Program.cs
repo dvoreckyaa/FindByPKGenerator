@@ -1,53 +1,83 @@
-﻿using CommandLine;
+﻿using System.Reflection;
+
+using CommandLine;
 
 using Common.FindByPKGenerator;
 
-var result = CommandLine.Parser.Default.ParseArguments<Options>(args).MapResult((opts) => RunOptionsAndReturnExitCode(opts), errs => HandleParseError(errs));
+using Microsoft.Extensions.Logging;
 
+var loggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddConsole();
+        });
+ILogger logger = loggerFactory.CreateLogger(Assembly.GetExecutingAssembly().GetName().Name);
+
+
+var result = CommandLine.Parser.Default.ParseArguments<Options>(args).MapResult((opts) => RunOptionsAndReturnExitCode(opts), errs => HandleParseError(errs));
 
 int RunOptionsAndReturnExitCode(Options o)
 {
-    Console.WriteLine($"Assembly Path: {o.AssemblyPath}");
-    Console.WriteLine($"Output Folder: {o.OutputFolder}");
+    logger.LogInformation($"File Path: {o.FilePath}");
+    logger.LogInformation($"Output Folder: {o.OutputFolder}");
+    if (!string.IsNullOrEmpty(o.OutputFileName))
+    {
+        logger.LogInformation($"Output file name: {o.OutputFileName}");
+    }
     if (!string.IsNullOrEmpty(o.ContextName))
     {
-        Console.WriteLine($"Context name: {o.ContextName}");
+        logger.LogInformation($"Context name: {o.ContextName}");
     }
-    if (!string.IsNullOrEmpty(o.FileName))
+    List<string> generatedFileNames = new List<string>();
+    if (Directory.Exists(o.FilePath))
     {
-        Console.WriteLine($"FileName name: {o.FileName}");
+        foreach (var fileName in Directory.GetFiles(o.FilePath, "*.csproj", SearchOption.TopDirectoryOnly))
+        {
+            new DbSetExtensionGenerator(logger).GenerateFileFromProject(fileName, o.OutputFolder, out IList<string> generatedFileNamesCur, o.ContextName, o.OutputFileName);
+            generatedFileNames.AddRange(generatedFileNamesCur);
+        }
     }
-    new DbSetExtensionGenerator().GenerateFileFromAssembly(o.AssemblyPath, o.OutputFolder, out IList<string> generatedFileNames, o.ContextName, o.FileName);
+    else
+    if (Path.GetExtension(o.FilePath).Equals(".csproj", StringComparison.OrdinalIgnoreCase))
+    {
+        new DbSetExtensionGenerator(logger).GenerateFileFromProject(o.FilePath, o.OutputFolder, out IList<string> generatedFileNamesCur, o.ContextName, o.OutputFileName);
+        generatedFileNames.AddRange(generatedFileNamesCur);
+    }
+    else
+    {
+        new DbSetExtensionGenerator(logger).GenerateFileFromAssembly(o.FilePath, o.OutputFolder, out IList<string> generatedFileNamesCur, o.ContextName, o.OutputFileName);
+        generatedFileNames.AddRange(generatedFileNamesCur);
+    }
+
     foreach (var fileName in generatedFileNames)
     {
-        Console.WriteLine(fileName);
+        logger.LogInformation(fileName);
     }
     if (!generatedFileNames.Any())
     {
-        Console.WriteLine("DbContext not found");
+        logger.LogInformation("DbContext not found");
     }
-    Console.WriteLine("Done.");
+    logger.LogInformation("Done.");
     return 0;
 }
 
 int HandleParseError(IEnumerable<Error> errs)
 {
     var result = -2;
-    Console.WriteLine("errors {0}", errs.Count());
+    logger.LogError("errors {0}", errs.Count());
     if (errs.Any(x => x is HelpRequestedError || x is VersionRequestedError))
         result = -1;
-    Console.WriteLine("Exit code {0}", result);
+    logger.LogError("Exit code {0}", result);
     return result;
 }
 
 class Options
 {
-    [Option('a', "assembly", Required = true, HelpText = "DbContext assembly path")]
-    public string AssemblyPath { get; set; }
+    [Option('i', "filePath", Required = true, HelpText = "DbContext assembly path or csproj file path or the path to the folder containig csproj file")]
+    public string FilePath { get; set; }
     [Option('o', "outputFolder", Required = true, HelpText = "Output folder")]
     public string OutputFolder { get; set; }
     [Option('x', "contextName", Required = false, HelpText = "Context name")]
     public string ContextName { get; set; }
-    [Option('f', "fileName", Required = false, HelpText = "Output file name")]
-    public string FileName { get; set; }
+    [Option('f', "outputFileName", Required = false, HelpText = "Output file name")]
+    public string OutputFileName { get; set; }
 }

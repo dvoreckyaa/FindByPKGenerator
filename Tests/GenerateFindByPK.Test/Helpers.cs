@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 
 using GenerateFindByPK.Test.Properties;
@@ -11,7 +10,6 @@ namespace FindByPKGenerator.Test
         public static string AdminContextFindByPrimaryKeyExtensionTemplateFileName => nameof(Resources.AdminContextFindByPrimaryKeyExtension) + ".cs";
         public static string GenerateTempFolderName()
         {
-            var assemblyPath = Assembly.GetExecutingAssembly().Location;
             return Path.Join(Path.GetTempPath(), Path.GetFileNameWithoutExtension(Path.GetRandomFileName()));
         }
 
@@ -22,18 +20,18 @@ namespace FindByPKGenerator.Test
             return tempPath;
         }
 
-        public static string GetFileHash(string filename)
+        public static async Task<string> GetFileHashAsync(string filename)
         {
             var hash = SHA512.Create();
-            var clearBytes = File.ReadAllBytes(filename);
+            var clearBytes = await File.ReadAllBytesAsync(filename);
             var hashedBytes = hash.ComputeHash(clearBytes);
             return ConvertBytesToHex(hashedBytes);
         }
 
-        public static string SaveAdminContextFindByPrimaryKeyExtensionTemplateFile(string path)
+        public static async Task<string> SaveAdminContextFindByPrimaryKeyExtensionTemplateFileAsync(string path)
         {
             var tempFileName = Path.Combine(path, Path.GetRandomFileName() + AdminContextFindByPrimaryKeyExtensionTemplateFileName);
-            File.WriteAllText(tempFileName, Resources.AdminContextFindByPrimaryKeyExtension);
+            await File.WriteAllTextAsync(tempFileName, Resources.AdminContextFindByPrimaryKeyExtension);
             return tempFileName;
         }
 

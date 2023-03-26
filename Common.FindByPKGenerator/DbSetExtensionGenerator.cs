@@ -1,9 +1,12 @@
 ﻿using System.Reflection;
 
+using Common.FindByPKGenerator.Helpers;
 using Common.FindByPKGenerator.Models;
 using Common.FindByPKGenerator.Template;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Common.FindByPKGenerator
 {
@@ -11,6 +14,12 @@ namespace Common.FindByPKGenerator
     {
         private const string fileName = "FindByPrimaryKeyExtension";
         private string outputFileName = string.Empty;
+        private readonly Microsoft.Extensions.Logging.ILogger? logger;
+
+        public DbSetExtensionGenerator(Microsoft.Extensions.Logging.ILogger logger = null)
+        {
+            this.logger = null ?? NullLogger.Instance;
+        }
 
         /// <summary>
         /// Generates *.cs a file containing an extension to support Find functons with named parameters. 
@@ -36,6 +45,43 @@ namespace Common.FindByPKGenerator
                 var generatedFileName = GetFileName(type, outputFolder);
                 generatedFileNames.Add(generatedFileName);
                 GenerateFile(templateModel, generatedFileName);
+            }
+        }
+
+        /// <summary>
+        /// Generates *.cs a file containing an extension to support Find functons with named parameters. 
+        /// Find(params object?[]? keyValues) -> FindByPrimaryKey(this DbSet<User> entities, Int32 userNo)
+        /// </summary>
+        /// <param name="contextAssemblyPath">path to the proj file containing DbContext</param>
+        /// <param name="outputFolder">folder where the extension file should be generated</param>
+        /// <param name="generatedFileNames">the list containing the generated files</param>
+        /// <param name="dbContextName">the name of the contex (optional). can be used if the assembly conatins several DbContext</param>
+        /// <param name="outputFileName">the name of the generated file (optional)</param>
+        public void GenerateFileFromProject(string projectPath, string outputFolder, out IList<string> generatedFileNames, string dbContextName = "", string outputFileName = "")
+        {
+            generatedFileNames = new List<string>();
+            var succeed = ProjectBuilder.CompileProject(projectPath, out string contextAssemblyPath, logger);
+            if (!succeed)
+            {
+                logger.LogError("Could not compile the project");
+                return;
+            }
+            this.outputFileName = outputFileName;
+            var sampleAssembly = Assembly.LoadFrom(contextAssemblyPath);
+            var dbContextTypes = sampleAssembly.GetTypes().Where(t => t.IsAssignableTo(typeof(DbContext))
+                                                                && (string.IsNullOrEmpty(dbContextName) || t.Name.Equals(dbContextName, StringComparison.InvariantCultureIgnoreCase)));
+            foreach (var type in dbContextTypes)
+            {
+                var calledMethodInfo = typeof(DbSetExtensionGenerator).GetMethod(nameof(FindByPKGeneratorFile), BindingFlags.NonPublic | BindingFlags.Static);
+                var calledMethod = calledMethodInfo.MakeGenericMethod(type);
+                TemplateModel templateModel = calledMethod.Invoke(null, new object[] { }) as TemplateModel;
+                var generatedFileName = GetFileName(type, outputFolder);
+                generatedFileNames.Add(generatedFileName);
+                GenerateFile(templateModel, generatedFileName);
+            }
+            if (dbContextTypes.Any())
+            {
+                logger.LogWarning("DbContext not found");
             }
         }
 

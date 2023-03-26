@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "FindByPKGenerator": {
-      "commandName": "Project",
-      "commandLineArgs": "--a d:\\_Projects\\webappeo\\Deployment\\Server\\net7.0\\EOApp.Db.Context.Data.dll --o d:\\!!!! --f GeneratedFile"
-    }
-  }
-}
