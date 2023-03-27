@@ -35,7 +35,7 @@ public static Entity FindByPrimaryKey(this DbSet<Entity> entities, Int32 Id)
 
 #### Examples:
 ```
- -i c:\Projects\Admin.Db\ -o c:\Projects\Admin.Db\Generated --f FindByPKExtension
+ -i c:\Projects\Admin.Db\ -o c:\Projects\Admin.Db\Generated -f FindByPKExtension
  -i c:\Projects\Admin.Db\Admin.Db.csproj -o c:\Projects\Admin.Db\Generated
  -i c:\Projects\Build\Admin.Db.dll -o c:\Projects\Admin.Db\Generated
 ```

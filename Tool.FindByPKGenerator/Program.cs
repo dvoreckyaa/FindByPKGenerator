@@ -32,6 +32,7 @@ int RunOptionsAndReturnExitCode(Options o)
     {
         foreach (var fileName in Directory.GetFiles(o.FilePath, "*.csproj", SearchOption.TopDirectoryOnly))
         {
+            logger.LogInformation($"Found: {fileName}");
             new DbSetExtensionGenerator(logger).GenerateFileFromProject(fileName, o.OutputFolder, out IList<string> generatedFileNamesCur, o.ContextName, o.OutputFileName);
             generatedFileNames.AddRange(generatedFileNamesCur);
         }
