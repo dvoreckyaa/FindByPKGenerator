@@ -12,22 +12,21 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Title>FindbyPK generator</Title>
     <Description>This project is to generate DbSet extensions to support Find by primary keys functions with named parameters.</Description>
-    <PackageTags>dbcontext findbypk findbyprimarykey</PackageTags>
+    <PackageTags>dbcontext findbypk findbyprimarykey ef core efcore entity framework</PackageTags>
     <PackageProjectUrl>https://www.nuget.org/packages/Tool.FindByPKGenerator</PackageProjectUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/dvoreckyaa/FindByPKGenerator</RepositoryUrl>
     <Authors>Alexey Dvoretsky</Authors>
-    <Company />
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

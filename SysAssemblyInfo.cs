@@ -1,10 +1,8 @@
-/*using System.Reflection;
-using System.Resources;
+using System.Reflection;
 
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCompany("Alexey Dvoretsky")]
+[assembly: AssemblyProduct("FindbyPK generator")]
+[assembly: AssemblyDescription("This project is to generate DbSet extensions to support Find by primary keys functions with named parameters.")]
 [assembly: AssemblyDelaySign(false)]
-[assembly: AssemblyVersion("")]
-[assembly: AssemblyFileVersion("")]
-[assembly: SatelliteContractVersionAttribute("")]*/
+[assembly: AssemblyVersion("1.0.2")]
+[assembly: AssemblyFileVersion("1.0.2")]
