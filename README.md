@@ -1,5 +1,5 @@
 # FindByPKGenerator
-This project is to generate DbSet extensions to support Find by primary key functions with named parameters.
+This project is to generate DbSet extensions to support Find by primary key functions using typed/named parameters.
 
 For example, to obtain an entity using PK we use standard method Find
 ```cs
