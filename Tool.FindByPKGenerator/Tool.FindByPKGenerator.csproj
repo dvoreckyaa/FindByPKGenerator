@@ -18,6 +18,8 @@
     <RepositoryUrl>https://github.com/dvoreckyaa/FindByPKGenerator</RepositoryUrl>
     <Authors>Alexey Dvoretsky</Authors>
     <Company />
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
