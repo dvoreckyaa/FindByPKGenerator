@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <PackageReference>
-           <PrivateAssets>all</PrivateAssets>
+           <PrivateAssets>contentfiles;analyzers;build</PrivateAssets>
     </PackageReference>
     <ProjectReference>
            <PrivateAssets>all</PrivateAssets>

@@ -38,3 +38,5 @@ project.lock.json
 
 /Source/Properties/launchSettings.json
 /Tool.FindByPKGenerator/Properties/launchSettings.json
+/Deployment/Release/net7.0
+/.config/dotnet-tools.json

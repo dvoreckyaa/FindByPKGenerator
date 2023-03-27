@@ -6,10 +6,40 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>generate-dbconext-findbypk</ToolCommandName>
-    <PackageOutputPath>./nupkg</PackageOutputPath>
+    <ToolCommandName>generate-findbypk</ToolCommandName>
+    <PackageOutputPath>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), README.md))\Deployment\nupkg</PackageOutputPath>
     <BaseOutputPath>$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), README.md))\Deployment\</BaseOutputPath>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>FindbyPK generator</Title>
+    <Description>This project is to generate DbSet extensions to support Find by primary keys functions with named parameters.</Description>
+    <PackageTags>dbcontext findbypk findbyprimarykey</PackageTags>
+    <PackageProjectUrl>https://github.com/dvoreckyaa/FindByPKGenerator</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/dvoreckyaa/FindByPKGenerator</RepositoryUrl>
+    <Authors>Alexey Dvoretsky</Authors>
+    <Company />
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateAssemblyInfo>True</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), SysAssemblyInfo.cs))\SysAssemblyInfo.cs" Link="Properties\SysAssemblyInfo.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="bin\**" />
+    <Compile Remove="nupkg\**" />
+    <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="nupkg\**" />
+    <None Remove="bin\**" />
+    <None Remove="nupkg\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove=".gitattributes" />
@@ -17,9 +47,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommandLineParser" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" />
     <PackageReference Include="System.CodeDom" />
   </ItemGroup>
