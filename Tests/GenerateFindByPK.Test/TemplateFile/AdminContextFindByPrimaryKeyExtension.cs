@@ -2,11 +2,11 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace  Admin.DB
+namespace Admin.DB
 {
     public static class AdminContextExtension
     {
-             public static Admin.DB.AccountLog FindByPrimaryKey(this DbSet<Admin.DB.AccountLog> entities, Int32 seq, String logType, DateTime logDate)
+        public static Admin.DB.AccountLog FindByPrimaryKey(this DbSet<Admin.DB.AccountLog> entities, Int32 seq, String logType, DateTime logDate)
         {
             return entities.Find(seq, logType, logDate);
         }

@@ -42,7 +42,7 @@ namespace FindByPKGenerator.Test
                 var generatedFileName = generatedFileNames.FirstOrDefault();
 
                 Assert.True(File.Exists(generatedFileName));
-                Assert.Equal(Path.GetFileName(generatedFileName), Helpers.AdminContextFindByPrimaryKeyExtensionTemplateFileName);
+                Assert.Equal(Helpers.AdminContextFindByPrimaryKeyExtensionTemplateFileName, Path.GetFileName(generatedFileName));
 
                 var templateFileName = await Helpers.SaveAdminContextFindByPrimaryKeyExtensionTemplateFileAsync(tempPath);
                 var hashOfTemplateFile = await Helpers.GetFileHashAsync(templateFileName);
@@ -67,7 +67,7 @@ namespace FindByPKGenerator.Test
                 var generatedFileName = generatedFileNames.FirstOrDefault();
 
                 Assert.True(File.Exists(generatedFileName));
-                Assert.Equal(Path.GetFileName(generatedFileName), Helpers.AdminContextFindByPrimaryKeyExtensionTemplateFileName);
+                Assert.Equal(Helpers.AdminContextFindByPrimaryKeyExtensionTemplateFileName, Path.GetFileName(generatedFileName));
 
                 var templateFileName = await Helpers.SaveAdminContextFindByPrimaryKeyExtensionTemplateFileAsync(tempPath);
                 var hashOfTemplateFile = await Helpers.GetFileHashAsync(templateFileName);
@@ -94,7 +94,7 @@ namespace FindByPKGenerator.Test
                 var generatedFileName = generatedFileNames.FirstOrDefault();
 
                 Assert.True(File.Exists(generatedFileName));
-                Assert.Equal(Path.GetFileName(generatedFileName), customFileName);
+                Assert.Equal(customFileName, Path.GetFileName(generatedFileName));
 
                 var templateFileName = await Helpers.SaveAdminContextFindByPrimaryKeyExtensionTemplateFileAsync(tempPath);
                 var hashOfTemplateFile = await Helpers.GetFileHashAsync(templateFileName);
@@ -121,7 +121,7 @@ namespace FindByPKGenerator.Test
                 var generatedFileName = generatedFileNames.FirstOrDefault();
 
                 Assert.True(File.Exists(generatedFileName));
-                Assert.Equal(Path.GetFileName(generatedFileName), customFileName);
+                Assert.Equal(customFileName, Path.GetFileName(generatedFileName));
 
                 var templateFileName = await Helpers.SaveAdminContextFindByPrimaryKeyExtensionTemplateFileAsync(tempPath);
                 var hashOfTemplateFile = await Helpers.GetFileHashAsync(templateFileName);
@@ -144,7 +144,7 @@ namespace FindByPKGenerator.Test
                 new DbSetExtensionGenerator(Logger).GenerateFileFromType<AdminContext>(tempPath, out string generatedFileName);
 
                 Assert.True(File.Exists(generatedFileName));
-                Assert.Equal(Path.GetFileName(generatedFileName), Helpers.AdminContextFindByPrimaryKeyExtensionTemplateFileName);
+                Assert.Equal(Helpers.AdminContextFindByPrimaryKeyExtensionTemplateFileName, Path.GetFileName(generatedFileName));
 
                 var templateFileName = await Helpers.SaveAdminContextFindByPrimaryKeyExtensionTemplateFileAsync(tempPath);
                 var hashOfTemplateFile = await Helpers.GetFileHashAsync(templateFileName);
@@ -168,7 +168,7 @@ namespace FindByPKGenerator.Test
                 new DbSetExtensionGenerator(Logger).GenerateFileFromType<AdminContext>(tempPath, out string generatedFileName, customFileName);
 
                 Assert.True(File.Exists(generatedFileName));
-                Assert.Equal(Path.GetFileName(generatedFileName), customFileName);
+                Assert.Equal(customFileName, Path.GetFileName(generatedFileName));
 
                 var templateFileName = await Helpers.SaveAdminContextFindByPrimaryKeyExtensionTemplateFileAsync(tempPath);
                 var hashOfTemplateFile = await Helpers.GetFileHashAsync(templateFileName);
@@ -185,7 +185,7 @@ namespace FindByPKGenerator.Test
         public void Generate_Content_FromClass_Default()
         {
             var content = DbSetExtensionGenerator.GenerateFileContentFromType<AdminContext>();
-            Assert.Equal(Resources.AdminContextFindByPrimaryKeyExtension, content);
+            Assert.Equal(content, Resources.AdminContextFindByPrimaryKeyExtension);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Common.FindByPKGenerator.Template
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+    #line 1 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "17.0.0.0")]
     public partial class FindByPrimaryKeyExtension : FindByPrimaryKeyExtensionBase
     {
@@ -29,90 +29,89 @@ namespace Common.FindByPKGenerator.Template
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write(" \r\n");
             this.Write("  \r\n");
-            this.Write("   \r\n\r\nusing System;\r\nusing System.Threading.Tasks;\r\nusing Microsoft.EntityFramew" +
-                    "orkCore;\r\n\r\nnamespace  ");
+            this.Write("   \r\n");
+            this.Write("     \r\n\r\nusing System;\r\nusing System.Threading.Tasks;\r\nusing Microsoft.EntityFram" +
+                    "eworkCore;\r\n\r\nnamespace ");
             
-            #line 12 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 12 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TemplateModel.DbNamespace));
             
             #line default
             #line hidden
             this.Write("\r\n{\r\n    public static class ");
             
-            #line 14 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 14 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(TemplateModel.ContextName));
             
             #line default
             #line hidden
-            this.Write("Extension\r\n    {\r\n     ");
+            this.Write("Extension\r\n    {\r\n");
             
-            #line 16 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
- foreach (var entityModel in TemplateModel.EntityModels)
-        { 
+            #line 16 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+ foreach (var entityModel in TemplateModel.EntityModels){ 
             
             #line default
             #line hidden
             this.Write("        public static ");
             
-            #line 18 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 17 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.EntityFullName));
             
             #line default
             #line hidden
             this.Write(" FindByPrimaryKey(this DbSet<");
             
-            #line 18 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 17 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.EntityFullName));
             
             #line default
             #line hidden
             this.Write("> entities, ");
             
-            #line 18 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 17 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.ParamList));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            return entities.Find(");
             
-            #line 20 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 19 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.ArgumentList));
             
             #line default
             #line hidden
             this.Write(");\r\n        }\r\n\r\n        public static async Task<");
             
-            #line 23 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 22 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.EntityFullName));
             
             #line default
             #line hidden
             this.Write("> FindByPrimaryKeyAsync(this DbSet<");
             
-            #line 23 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 22 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.EntityFullName));
             
             #line default
             #line hidden
             this.Write("> entities, ");
             
-            #line 23 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 22 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.ParamList));
             
             #line default
             #line hidden
             this.Write(")\r\n        {\r\n            return await entities.FindAsync(");
             
-            #line 25 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 24 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(entityModel.ArgumentList));
             
             #line default
             #line hidden
             this.Write(");\r\n        }\r\n\r\n");
             
-            #line 28 "D:\_GitProjects\GenerateFindByPK\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
+            #line 27 "D:\_GitProjects\FindByPKGenerator\Common.FindByPKGenerator\Template\FindByPrimaryKeyExtension.tt"
  } 
             
             #line default
