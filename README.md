@@ -41,3 +41,7 @@ public static Entity FindByPrimaryKey(this DbSet<Entity> entities, Int32 Id)
 ```
     
 The tool uses [commandlineparser](https://github.com/commandlineparser/commandline) to parse command line arguments.
+
+
+Nuget:
+https://www.nuget.org/packages/Tool.FindByPKGenerator
