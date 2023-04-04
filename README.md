@@ -53,3 +53,7 @@ dotnet tool run generate-findbypk -i c:\Projects\Build\Admin.Db.dll -o c:\Projec
 
     
 The tool uses [commandlineparser](https://github.com/commandlineparser/commandline) to parse command line arguments.
+
+
+Nuget:
+https://www.nuget.org/packages/Tool.FindByPKGenerator
