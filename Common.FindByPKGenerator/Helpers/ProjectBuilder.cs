@@ -54,8 +54,14 @@ namespace Common.FindByPKGenerator.Helpers
 
             var project = new ProjectInstance(projectFilePath);
             targetPath = project.GetPropertyValue("TargetPath");
-
-            return Path.Exists(targetPath);
+            /*if (string.IsNullOrEmpty(targetPath))
+            {
+                string targetFw = project.GetPropertyValue("MicrosoftNETBuildTasksTFM");
+                string restFolder = project.GetPropertyValue("RestoreOutputPath");
+                targetPath = Path.Combine(targetFw, restFolder);
+            }
+            return p.ExitCode == 0;*/
+            return File.Exists(targetPath);
         }
     }
 }

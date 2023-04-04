@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>$(TargetFramework)</TargetFramework>
+    <TargetFrameworks>$(TargetFrameworks)</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
@@ -29,9 +29,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Include="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), SysAssemblyInfo.cs))\SysAssemblyInfo.cs" Link="Properties\SysAssemblyInfo.cs" />
-  </ItemGroup>
+  <Import Project="..\Deploy.Sdk.Targets" />
 
   <ItemGroup>
     <Compile Remove="bin\**" />

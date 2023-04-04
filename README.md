@@ -39,5 +39,17 @@ public static Entity FindByPrimaryKey(this DbSet<Entity> entities, Int32 Id)
  -i c:\Projects\Admin.Db\Admin.Db.csproj -o c:\Projects\Admin.Db\Generated
  -i c:\Projects\Build\Admin.Db.dll -o c:\Projects\Admin.Db\Generated
 ```
+
+To install the tool:
+```
+dotnet tool install --global Tool.FindByPKGenerator
+```
+
+To run the tool:
+```
+dotnet tool run generate-findbypk -i c:\Projects\Build\Admin.Db.dll -o c:\Projects\Admin.Db\Generated
+```
+
+
     
 The tool uses [commandlineparser](https://github.com/commandlineparser/commandline) to parse command line arguments.

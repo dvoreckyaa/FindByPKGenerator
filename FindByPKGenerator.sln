@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{59A4E119-63EF-4FA3-B95B-0A64F00AE989}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		Deploy.Sdk.Targets = Deploy.Sdk.Targets
 		Directory.Packages.props = Directory.Packages.props
 		README.md = README.md
 	EndProjectSection

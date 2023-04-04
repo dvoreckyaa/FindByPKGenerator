@@ -1,0 +1,11 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="CleaningBinObj" BeforeTargets="BeforeBuild">
+    <Message Text="Cleaning bin/obj" />
+    <!-- Remove obj folder 
+    <RemoveDir Directories="$(BaseIntermediateOutputPath)" />-->
+    <RemoveDir Directories="bin" />
+    <!-- Remove bin folder 
+    <RemoveDir Directories="$(BaseOutputPath)" />-->
+    <RemoveDir Directories="bin" />
+  </Target>
+</Project>
